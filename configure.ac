@@ -5,6 +5,7 @@ AC_INIT([libfastjson], 0.99.1.master, [rsyslog@lists.adiscon.com])
 
 AM_INIT_AUTOMAKE
 
+AC_PROG_CC_C99
 AC_PROG_MAKE_SET
 
 AC_ARG_ENABLE(rdrand,
@@ -110,11 +111,8 @@ AS_IF([test "x$enable_Bsymbolic" = "xcheck"],
 AS_IF([test "x$enable_Bsymbolic" = "xyes"], [JSON_BSYMBOLIC_LDFLAGS=-Wl[,]-Bsymbolic-functions])
 AC_SUBST(JSON_BSYMBOLIC_LDFLAGS)
 
-#AX_APPEND_COMPILE_FLAGS([-Wall -Werror -Wno-error=deprecated-declarations])
-AX_APPEND_COMPILE_FLAGS([-Wall -Wno-error=deprecated-declarations])
-AX_APPEND_COMPILE_FLAGS([-Wextra -Wwrite-string -Wno-unused-parameter])
-AX_APPEND_COMPILE_FLAGS([-std=gnu99])
-AX_APPEND_COMPILE_FLAGS([-D_GNU_SOURCE -D_REENTRANT])
+# This requires autorconf 6.24 (no Centos6 and below!):
+#AX_APPEND_COMPILE_FLAGS([-D_GNU_SOURCE -D_REENTRANT])
 
 AC_CONFIG_FILES([
 Makefile
@@ -124,4 +122,3 @@ libfastjson-uninstalled.pc
 #tests/Makefile
 
 AC_OUTPUT
-
