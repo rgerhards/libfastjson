@@ -1,15 +1,17 @@
 AC_PREREQ(2.52)
 
 # Process this file with autoconf to produce a configure script.
-AC_INIT([libfastjson], [0.99.3], [rsyslog@lists.adiscon.com])
-AC_CONFIG_HEADER(config.h)
-
+AC_INIT([libfastjson], [0.99.4], [rsyslog@lists.adiscon.com])
 AM_INIT_AUTOMAKE([subdir-objects])
+
+AC_CONFIG_SRCDIR([ChangeLog])
 AC_CONFIG_MACRO_DIR([m4])
-AC_USE_SYSTEM_EXTENSIONS
+AC_CONFIG_HEADERS([config.h])
+
+m4_ifdef([AC_USE_SYSTEM_EXTENSIONS], [AC_USE_SYSTEM_EXTENSIONS])
 
 AC_PROG_CC
-AC_PROG_CC_C99
+m4_ifdef([AC_PROG_CC_C99], [AC_PROG_CC_C99], [CFLAGS="$CFLAGS -std=c99"])
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 AC_PROG_MAKE_SET
